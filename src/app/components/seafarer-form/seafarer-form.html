@@ -2,11 +2,10 @@
   <mat-card class="form-card">
     <mat-card-header>
       <div>
-        <button mat-button type="button" (click)="onBack()" class="back-button"> 
-            <mat-icon>arrow_back</mat-icon>
-            Back
-         </button>
-         
+        <button mat-button type="button" (click)="onCancel()" class="back-button">
+          Back
+        </button>
+
       </div>
       <mat-card-title>
         {{ isEditMode ? 'Edit Seafarer' : 'Add New Seafarer' }}
@@ -14,8 +13,8 @@
       <mat-card-subtitle>
         {{ isEditMode ? 'Update seafarer information' : 'Enter seafarer details' }}
       </mat-card-subtitle>
-         
-      
+
+
 
     </mat-card-header>
 
@@ -261,35 +260,35 @@
                     <mat-icon>add</mat-icon>
                   </button>
                 </div>
-                
+
                 <div formArrayName="qualifications">
-                  <div *ngFor="let qualification of qualifications.controls; let i = index" 
-                       [formGroupName]="i" class="array-item">
+                  <div *ngFor="let qualification of qualifications.controls; let i = index" [formGroupName]="i"
+                    class="array-item">
                     <div class="array-item-header">
                       <span>Qualification {{i + 1}}</span>
                       <button mat-icon-button type="button" (click)="removeQualification(i)" color="warn">
                         <mat-icon>delete</mat-icon>
                       </button>
                     </div>
-                    
+
                     <div class="form-row">
                       <mat-form-field appearance="outline">
                         <mat-label>Degree/Course</mat-label>
                         <input matInput formControlName="DegreeOrCourse">
                       </mat-form-field>
-                      
+
                       <mat-form-field appearance="outline">
                         <mat-label>University</mat-label>
                         <input matInput formControlName="University">
                       </mat-form-field>
                     </div>
-                    
+
                     <div class="form-row">
                       <mat-form-field appearance="outline">
                         <mat-label>Major/Subject</mat-label>
                         <input matInput formControlName="MajorOrSubject">
                       </mat-form-field>
-                      
+
                       <mat-form-field appearance="outline">
                         <mat-label>Country</mat-label>
                         <input matInput formControlName="Country">
@@ -307,35 +306,35 @@
                     <mat-icon>add</mat-icon>
                   </button>
                 </div>
-                
+
                 <div formArrayName="workExperiences">
-                  <div *ngFor="let experience of workExperiences.controls; let i = index" 
-                       [formGroupName]="i" class="array-item">
+                  <div *ngFor="let experience of workExperiences.controls; let i = index" [formGroupName]="i"
+                    class="array-item">
                     <div class="array-item-header">
                       <span>Experience {{i + 1}}</span>
                       <button mat-icon-button type="button" (click)="removeWorkExperience(i)" color="warn">
                         <mat-icon>delete</mat-icon>
                       </button>
                     </div>
-                    
+
                     <div class="form-row">
                       <mat-form-field appearance="outline">
                         <mat-label>Vessel Name</mat-label>
                         <input matInput formControlName="VesselName">
                       </mat-form-field>
-                      
+
                       <mat-form-field appearance="outline">
                         <mat-label>Vessel Type</mat-label>
                         <input matInput formControlName="VesselType">
                       </mat-form-field>
                     </div>
-                    
+
                     <div class="form-row">
                       <mat-form-field appearance="outline">
                         <mat-label>Rank</mat-label>
                         <input matInput formControlName="Rank">
                       </mat-form-field>
-                      
+
                       <mat-form-field appearance="outline">
                         <mat-label>Company Name</mat-label>
                         <input matInput formControlName="CompanyName">
@@ -349,7 +348,7 @@
         </mat-tab-group>
 
         <div class="form-actions">
-         
+
           <button mat-button type="button" (click)="onCancel()">Cancel</button>
           <button mat-raised-button color="primary" type="submit" [disabled]="isLoading">
             <mat-spinner *ngIf="isLoading" diameter="20"></mat-spinner>
@@ -361,4 +360,3 @@
     </mat-card-content>
   </mat-card>
 </div>
-

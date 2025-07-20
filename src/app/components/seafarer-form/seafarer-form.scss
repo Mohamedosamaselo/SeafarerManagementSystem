@@ -1,16 +1,17 @@
 .seafarer-form-container {
   
   background-color: #f5f5f5;
-  padding: 20px;
+  padding:50px 20px;
   overflow-y: auto;
+  min-height: 100vh;
 }
 
 .form-card {
   max-width: 1000px;
   margin: 0 auto;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  box-shadow:0 4px 8px rgb(0 0 0 / 41%);
   border-radius: 8px;
-  margin-bottom: 40px; // Add margin at bottom for better scrolling
+  margin-bottom: 40px; 
 }
 
 .form-card mat-card-header {

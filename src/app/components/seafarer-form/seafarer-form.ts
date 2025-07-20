@@ -56,12 +56,12 @@ export class SeafarerFormComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute,
     private snackBar: MatSnackBar
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.initializeForm();
     this.loadDropdownData();
-    
+
     // Check if we're in edit mode
     this.route.params.subscribe(params => {
       if (params['id']) {
@@ -101,7 +101,7 @@ export class SeafarerFormComponent implements OnInit {
       CicpaIssueDate: [''],
       CicpaExpiryDate: [''],
       Declaration: [''],
-      
+
       // Boolean fields with comments
       SignedOffFromAShipDueToMedicalReason: [false],
       SignedOffFromAShipDueToMedicalReasonComment: [''],
@@ -115,7 +115,7 @@ export class SeafarerFormComponent implements OnInit {
       InquiryOrInvolvedMaritimeAccidentComment: [''],
       LicenseSuspendedOrRevoked: [false],
       LicenseSuspendedOrRevokedComment: [''],
-      
+
       // Detail arrays
       qualifications: this.fb.array([]),
       certificates: this.fb.array([]),
@@ -139,7 +139,7 @@ export class SeafarerFormComponent implements OnInit {
 
   loadSeafarerData(id: number): void {
     this.isLoading = true;
-    
+
     // First try the main endpoint
     this.seafarerService.getSeafarerById(id).subscribe({
       next: (response) => {
@@ -236,7 +236,7 @@ export class SeafarerFormComponent implements OnInit {
   populateQualifications(qualifications: Qualification[]): void {
     const qualificationArray = this.qualifications;
     qualificationArray.clear();
-    
+
     qualifications.filter(q => q.SeaFarerId === this.seafarerId).forEach(qualification => {
       const qualificationGroup = this.fb.group({
         DegreeOrCourse: [qualification.DegreeOrCourse || ''],
@@ -254,7 +254,7 @@ export class SeafarerFormComponent implements OnInit {
   populateCertificates(certificates: Certificate[]): void {
     const certificateArray = this.certificates;
     certificateArray.clear();
-    
+
     certificates.filter(c => c.SeaFarerId === this.seafarerId).forEach(certificate => {
       const certificateGroup = this.fb.group({
         Capacity: [certificate.Capacity || ''],
@@ -273,7 +273,7 @@ export class SeafarerFormComponent implements OnInit {
   populateLanguages(languages: Language[]): void {
     const languageArray = this.languages;
     languageArray.clear();
-    
+
     languages.filter(l => l.SeaFarerId === this.seafarerId).forEach(language => {
       const languageGroup = this.fb.group({
         Language: [language.Language || ''],
@@ -289,7 +289,7 @@ export class SeafarerFormComponent implements OnInit {
   populateReferences(references: Reference[]): void {
     const referenceArray = this.references;
     referenceArray.clear();
-    
+
     references.filter(r => r.SeaFarerId === this.seafarerId).forEach(reference => {
       const referenceGroup = this.fb.group({
         PersonName: [reference.PersonName || ''],
@@ -305,7 +305,7 @@ export class SeafarerFormComponent implements OnInit {
   populateWorkExperiences(workExperiences: WorkExperience[]): void {
     const workExperienceArray = this.workExperiences;
     workExperienceArray.clear();
-    
+
     workExperiences.filter(w => w.SeaFarerId === this.seafarerId).forEach(workExperience => {
       const workExperienceGroup = this.fb.group({
         VesselName: [workExperience.VesselName || ''],
@@ -439,7 +439,7 @@ export class SeafarerFormComponent implements OnInit {
   onSubmit(): void {
     if (this.seafarerForm.valid) {
       this.isLoading = true;
-      
+
       const formValue = this.seafarerForm.value;
       const seafarerRequest: SeafarerRequest = {
         entity: {
@@ -497,8 +497,6 @@ export class SeafarerFormComponent implements OnInit {
     this.router.navigate(['/seafarers']);
   }
 
-  onBack(): void {
-    this.router.navigate(['/seafarers']);
-  }
+
 }
 
