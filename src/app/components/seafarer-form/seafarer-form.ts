@@ -14,9 +14,9 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { MatIconModule } from '@angular/material/icon';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
-import { SeafarerService } from '../../services/seafarer.service';
-import { DropdownService } from '../../services/dropdown.service';
-import { DropdownItem, SeafarerRequest, Seafarer, Qualification, Certificate, Language, Reference, WorkExperience } from '../../models/seafarer.model';
+import { SeafarerService } from '../../Core/services/seafarer.service';
+import { DropdownService } from '../../Core/services/dropdown.service';
+import { DropdownItem, SeafarerRequest, Seafarer, Qualification, Certificate, Language, Reference, WorkExperience } from '../../Core/models/seafarer.model';
 
 @Component({
   selector: 'app-seafarer-form',

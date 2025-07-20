@@ -10,9 +10,9 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatDialogModule, MatDialog } from '@angular/material/dialog';
 import { MatChipsModule } from '@angular/material/chips';
-import { SeafarerService } from '../../services/seafarer.service';
-import { AuthService } from '../../services/auth.service';
-import { Seafarer } from '../../models/seafarer.model';
+import { SeafarerService } from '../../Core/services/seafarer.service';
+import { AuthService } from '../../Core/services/auth.service';
+import { Seafarer } from '../../Core/models/seafarer.model';
 
 @Component({
   selector: 'app-seafarer-list',
@@ -54,7 +54,7 @@ export class SeafarerListComponent implements OnInit {
     private router: Router,
     private snackBar: MatSnackBar,
     private dialog: MatDialog
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.loadSeafarers();

@@ -14,7 +14,7 @@ export class SeafarerService {
   constructor(
     private http: HttpClient,
     private authService: AuthService
-  ) {}
+  ) { }
 
   getAllSeafarers(): Observable<any> {
     const params = new HttpParams()
@@ -84,7 +84,7 @@ export class SeafarerService {
 
   private handleError(error: HttpErrorResponse): Observable<never> {
     let errorMessage = 'An unknown error occurred!';
-    
+
     if (error.error instanceof ErrorEvent) {
       // Client-side error
       errorMessage = `Error: ${error.error.message}`;
@@ -107,7 +107,7 @@ export class SeafarerService {
           errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
       }
     }
-    
+
     console.error('API Error:', error);
     return throwError(() => new Error(errorMessage));
   }

@@ -13,7 +13,7 @@ export class DropdownService {
   constructor(
     private http: HttpClient,
     private authService: AuthService
-  ) {}
+  ) { }
 
   getEmployees(): Observable<DropdownItem[]> {
     const params = new HttpParams()
