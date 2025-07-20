@@ -139,45 +139,27 @@ export class SeafarerFormComponent implements OnInit {
 
   loadSeafarerData(id: number): void {
     this.isLoading = true;
-
-
-    this.seafarerService.getSeafarerById(id).subscribe({
+    this.seafarerService.getAllSeafarers().subscribe({
       next: (response) => {
         this.isLoading = false;
         if (response && response.Data && response.Data.length > 0) {
-          const seafarer = response.Data[0];
-          this.populateForm(seafarer, response);
+          const seafarer = response.Data.find((s: Seafarer) => s.Id === id);
+          if (seafarer) {
+            this.populateForm(seafarer, response);
+          } else {
+            this.snackBar.open("Seafarer not found in the list.", "Close", { duration: 3000 });
+            this.router.navigate(["/seafarers"]);
+          }
         } else {
-          this.snackBar.open('No seafarer data found', 'Close', {
-            duration: 3000
-          });
+          this.snackBar.open("No seafarer data found from getAllSeafarers.", "Close", { duration: 3000 });
+          this.router.navigate(["/seafarers"]);
         }
       },
       error: (error) => {
-        console.warn('Primary endpoint failed, trying alternative:', error);
-
-        this.seafarerService.getSeafarerDetails(id).subscribe({
-          next: (response) => {
-            this.isLoading = false;
-            if (response && response.Data && response.Data.length > 0) {
-              const seafarer = response.Data[0];
-              this.populateForm(seafarer, response);
-            } else {
-              this.snackBar.open('No seafarer data found', 'Close', {
-                duration: 3000
-              });
-            }
-          },
-          error: (altError) => {
-            this.isLoading = false;
-            this.snackBar.open('Failed to load seafarer data: ' + altError.message, 'Close', {
-              duration: 5000
-            });
-            console.error('Both endpoints failed:', altError);
-
-            // this.router.navigate(['/seafarers']);
-          }
-        });
+        this.isLoading = false;
+        this.snackBar.open("Failed to load seafarer data: " + error.message, "Close", { duration: 5000 });
+        console.error("Error loading seafarer:", error);
+        this.router.navigate(["/seafarers"]);
       }
     });
   }
