@@ -1,0 +1,364 @@
+<div class="seafarer-form-container">
+  <mat-card class="form-card">
+    <mat-card-header>
+      <div>
+        <button mat-button type="button" (click)="onBack()" class="back-button"> 
+            <mat-icon>arrow_back</mat-icon>
+            Back
+         </button>
+         
+      </div>
+      <mat-card-title>
+        {{ isEditMode ? 'Edit Seafarer' : 'Add New Seafarer' }}
+      </mat-card-title>
+      <mat-card-subtitle>
+        {{ isEditMode ? 'Update seafarer information' : 'Enter seafarer details' }}
+      </mat-card-subtitle>
+         
+      
+
+    </mat-card-header>
+
+    <mat-card-content>
+      <form [formGroup]="seafarerForm" (ngSubmit)="onSubmit()">
+        <mat-tab-group>
+          <!-- Basic Information Tab -->
+          <mat-tab label="Basic Information">
+            <div class="tab-content">
+              <div class="form-row">
+                <mat-form-field appearance="outline">
+                  <mat-label>Employee</mat-label>
+                  <mat-select formControlName="EmpId" required>
+                    <mat-option *ngFor="let employee of employees" [value]="employee.Value">
+                      {{employee.Text}}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+
+                <mat-form-field appearance="outline">
+                  <mat-label>Visa Sponsor</mat-label>
+                  <mat-select formControlName="VisaSponsorId" required>
+                    <mat-option *ngFor="let vendor of vendors" [value]="vendor.Value">
+                      {{vendor.Text}}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+
+              <div class="form-row">
+                <mat-form-field appearance="outline">
+                  <mat-label>Seaman Book Number</mat-label>
+                  <input matInput formControlName="SeamanBookNO">
+                </mat-form-field>
+
+                <mat-form-field appearance="outline">
+                  <mat-label>Visa UAE ID Number</mat-label>
+                  <input matInput formControlName="VisaUAEIdNO">
+                </mat-form-field>
+              </div>
+
+              <div class="form-row">
+                <mat-form-field appearance="outline">
+                  <mat-label>Name of Spouse</mat-label>
+                  <input matInput formControlName="NameOfSpouse">
+                </mat-form-field>
+
+                <mat-form-field appearance="outline">
+                  <mat-label>Number of Children</mat-label>
+                  <input matInput type="number" formControlName="NoOfChildren">
+                </mat-form-field>
+              </div>
+
+              <div class="form-row">
+                <mat-form-field appearance="outline">
+                  <mat-label>Body Weight (kg)</mat-label>
+                  <input matInput type="number" formControlName="BodyWeight">
+                </mat-form-field>
+
+                <mat-form-field appearance="outline">
+                  <mat-label>Height (cm)</mat-label>
+                  <input matInput type="number" formControlName="Height">
+                </mat-form-field>
+              </div>
+            </div>
+          </mat-tab>
+
+          <!-- Dates Tab -->
+          <mat-tab label="Important Dates">
+            <div class="tab-content">
+              <div class="form-row">
+                <mat-form-field appearance="outline">
+                  <mat-label>Passport Issue Date</mat-label>
+                  <input matInput [matDatepicker]="passportIssuePicker" formControlName="PassPortIssueDate">
+                  <mat-datepicker-toggle matSuffix [for]="passportIssuePicker"></mat-datepicker-toggle>
+                  <mat-datepicker #passportIssuePicker></mat-datepicker>
+                </mat-form-field>
+
+                <mat-form-field appearance="outline">
+                  <mat-label>ID Expiry Date</mat-label>
+                  <input matInput [matDatepicker]="idExpiryPicker" formControlName="IDExPiryDate">
+                  <mat-datepicker-toggle matSuffix [for]="idExpiryPicker"></mat-datepicker-toggle>
+                  <mat-datepicker #idExpiryPicker></mat-datepicker>
+                </mat-form-field>
+              </div>
+
+              <div class="form-row">
+                <mat-form-field appearance="outline">
+                  <mat-label>Visa Issue Date</mat-label>
+                  <input matInput [matDatepicker]="visaIssuePicker" formControlName="VisaIssueDate">
+                  <mat-datepicker-toggle matSuffix [for]="visaIssuePicker"></mat-datepicker-toggle>
+                  <mat-datepicker #visaIssuePicker></mat-datepicker>
+                </mat-form-field>
+
+                <mat-form-field appearance="outline">
+                  <mat-label>Visa Expiry Date</mat-label>
+                  <input matInput [matDatepicker]="visaExpiryPicker" formControlName="VisaExpiryDate">
+                  <mat-datepicker-toggle matSuffix [for]="visaExpiryPicker"></mat-datepicker-toggle>
+                  <mat-datepicker #visaExpiryPicker></mat-datepicker>
+                </mat-form-field>
+              </div>
+
+              <div class="form-row">
+                <mat-form-field appearance="outline">
+                  <mat-label>Seaman Issue Date</mat-label>
+                  <input matInput [matDatepicker]="seamanIssuePicker" formControlName="SeamanIssueDate">
+                  <mat-datepicker-toggle matSuffix [for]="seamanIssuePicker"></mat-datepicker-toggle>
+                  <mat-datepicker #seamanIssuePicker></mat-datepicker>
+                </mat-form-field>
+
+                <mat-form-field appearance="outline">
+                  <mat-label>Seaman Expiry Date</mat-label>
+                  <input matInput [matDatepicker]="seamanExpiryPicker" formControlName="SeamanExpiryDate">
+                  <mat-datepicker-toggle matSuffix [for]="seamanExpiryPicker"></mat-datepicker-toggle>
+                  <mat-datepicker #seamanExpiryPicker></mat-datepicker>
+                </mat-form-field>
+              </div>
+            </div>
+          </mat-tab>
+
+          <!-- Contact Information Tab -->
+          <mat-tab label="Contact Information">
+            <div class="tab-content">
+              <div class="form-row">
+                <mat-form-field appearance="outline">
+                  <mat-label>Nearest Airport</mat-label>
+                  <input matInput formControlName="NearestAirport">
+                </mat-form-field>
+
+                <mat-form-field appearance="outline">
+                  <mat-label>Residence Number</mat-label>
+                  <input matInput formControlName="ResidenceNumber">
+                </mat-form-field>
+              </div>
+
+              <div class="form-row">
+                <mat-form-field appearance="outline">
+                  <mat-label>Skype ID</mat-label>
+                  <input matInput formControlName="SkypeID">
+                </mat-form-field>
+
+                <mat-form-field appearance="outline">
+                  <mat-label>Contact Number (Home Country)</mat-label>
+                  <input matInput formControlName="ContactNumberHomeCountry">
+                </mat-form-field>
+              </div>
+
+              <mat-form-field appearance="outline" class="full-width">
+                <mat-label>Permanent Address (Home Country)</mat-label>
+                <textarea matInput formControlName="PermanentAddressHomeCountry" rows="3"></textarea>
+              </mat-form-field>
+
+              <mat-form-field appearance="outline" class="full-width">
+                <mat-label>Emergency Contact (UAE)</mat-label>
+                <textarea matInput formControlName="ContactNameAndNumberDuringEmergenciesUAE" rows="2"></textarea>
+              </mat-form-field>
+
+              <mat-form-field appearance="outline" class="full-width">
+                <mat-label>Emergency Contact (Home)</mat-label>
+                <textarea matInput formControlName="ContactNameAndNumberDuringEmergenciesHome" rows="2"></textarea>
+              </mat-form-field>
+            </div>
+          </mat-tab>
+
+          <!-- Medical & Legal Tab -->
+          <mat-tab label="Medical & Legal">
+            <div class="tab-content">
+              <div class="checkbox-section">
+                <mat-checkbox formControlName="SignedOffFromAShipDueToMedicalReason">
+                  Signed off from a ship due to medical reason
+                </mat-checkbox>
+                <mat-form-field appearance="outline" class="full-width">
+                  <mat-label>Comment</mat-label>
+                  <textarea matInput formControlName="SignedOffFromAShipDueToMedicalReasonComment" rows="2"></textarea>
+                </mat-form-field>
+              </div>
+
+              <div class="checkbox-section">
+                <mat-checkbox formControlName="UndergoneAnyMedicalOperation">
+                  Undergone any medical operation
+                </mat-checkbox>
+                <mat-form-field appearance="outline" class="full-width">
+                  <mat-label>Comment</mat-label>
+                  <textarea matInput formControlName="UndergoneAnyMedicalOperationComment" rows="2"></textarea>
+                </mat-form-field>
+              </div>
+
+              <div class="checkbox-section">
+                <mat-checkbox formControlName="DoctorConsultation">
+                  Doctor consultation
+                </mat-checkbox>
+                <mat-form-field appearance="outline" class="full-width">
+                  <mat-label>Comment</mat-label>
+                  <textarea matInput formControlName="DoctorConsultationComment" rows="2"></textarea>
+                </mat-form-field>
+              </div>
+
+              <div class="checkbox-section">
+                <mat-checkbox formControlName="HealthOrDisabilityProblem">
+                  Health or disability problem
+                </mat-checkbox>
+                <mat-form-field appearance="outline" class="full-width">
+                  <mat-label>Comment</mat-label>
+                  <textarea matInput formControlName="HealthOrDisabilityProblemComment" rows="2"></textarea>
+                </mat-form-field>
+              </div>
+
+              <div class="checkbox-section">
+                <mat-checkbox formControlName="InquiryOrInvolvedMaritimeAccident">
+                  Inquiry or involved in maritime accident
+                </mat-checkbox>
+                <mat-form-field appearance="outline" class="full-width">
+                  <mat-label>Comment</mat-label>
+                  <textarea matInput formControlName="InquiryOrInvolvedMaritimeAccidentComment" rows="2"></textarea>
+                </mat-form-field>
+              </div>
+
+              <div class="checkbox-section">
+                <mat-checkbox formControlName="LicenseSuspendedOrRevoked">
+                  License suspended or revoked
+                </mat-checkbox>
+                <mat-form-field appearance="outline" class="full-width">
+                  <mat-label>Comment</mat-label>
+                  <textarea matInput formControlName="LicenseSuspendedOrRevokedComment" rows="2"></textarea>
+                </mat-form-field>
+              </div>
+
+              <mat-form-field appearance="outline" class="full-width">
+                <mat-label>Declaration</mat-label>
+                <textarea matInput formControlName="Declaration" rows="4"></textarea>
+              </mat-form-field>
+            </div>
+          </mat-tab>
+
+          <!-- Additional Information Tab -->
+          <mat-tab label="Additional Info">
+            <div class="tab-content">
+              <!-- Qualifications Section -->
+              <div class="section">
+                <div class="section-header">
+                  <h3>Qualifications</h3>
+                  <button mat-icon-button type="button" (click)="addQualification()" color="primary">
+                    <mat-icon>add</mat-icon>
+                  </button>
+                </div>
+                
+                <div formArrayName="qualifications">
+                  <div *ngFor="let qualification of qualifications.controls; let i = index" 
+                       [formGroupName]="i" class="array-item">
+                    <div class="array-item-header">
+                      <span>Qualification {{i + 1}}</span>
+                      <button mat-icon-button type="button" (click)="removeQualification(i)" color="warn">
+                        <mat-icon>delete</mat-icon>
+                      </button>
+                    </div>
+                    
+                    <div class="form-row">
+                      <mat-form-field appearance="outline">
+                        <mat-label>Degree/Course</mat-label>
+                        <input matInput formControlName="DegreeOrCourse">
+                      </mat-form-field>
+                      
+                      <mat-form-field appearance="outline">
+                        <mat-label>University</mat-label>
+                        <input matInput formControlName="University">
+                      </mat-form-field>
+                    </div>
+                    
+                    <div class="form-row">
+                      <mat-form-field appearance="outline">
+                        <mat-label>Major/Subject</mat-label>
+                        <input matInput formControlName="MajorOrSubject">
+                      </mat-form-field>
+                      
+                      <mat-form-field appearance="outline">
+                        <mat-label>Country</mat-label>
+                        <input matInput formControlName="Country">
+                      </mat-form-field>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Work Experience Section -->
+              <div class="section">
+                <div class="section-header">
+                  <h3>Work Experience</h3>
+                  <button mat-icon-button type="button" (click)="addWorkExperience()" color="primary">
+                    <mat-icon>add</mat-icon>
+                  </button>
+                </div>
+                
+                <div formArrayName="workExperiences">
+                  <div *ngFor="let experience of workExperiences.controls; let i = index" 
+                       [formGroupName]="i" class="array-item">
+                    <div class="array-item-header">
+                      <span>Experience {{i + 1}}</span>
+                      <button mat-icon-button type="button" (click)="removeWorkExperience(i)" color="warn">
+                        <mat-icon>delete</mat-icon>
+                      </button>
+                    </div>
+                    
+                    <div class="form-row">
+                      <mat-form-field appearance="outline">
+                        <mat-label>Vessel Name</mat-label>
+                        <input matInput formControlName="VesselName">
+                      </mat-form-field>
+                      
+                      <mat-form-field appearance="outline">
+                        <mat-label>Vessel Type</mat-label>
+                        <input matInput formControlName="VesselType">
+                      </mat-form-field>
+                    </div>
+                    
+                    <div class="form-row">
+                      <mat-form-field appearance="outline">
+                        <mat-label>Rank</mat-label>
+                        <input matInput formControlName="Rank">
+                      </mat-form-field>
+                      
+                      <mat-form-field appearance="outline">
+                        <mat-label>Company Name</mat-label>
+                        <input matInput formControlName="CompanyName">
+                      </mat-form-field>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </mat-tab>
+        </mat-tab-group>
+
+        <div class="form-actions">
+         
+          <button mat-button type="button" (click)="onCancel()">Cancel</button>
+          <button mat-raised-button color="primary" type="submit" [disabled]="isLoading">
+            <mat-spinner *ngIf="isLoading" diameter="20"></mat-spinner>
+            <span *ngIf="!isLoading">{{ isEditMode ? 'Update' : 'Save' }}</span>
+            <span *ngIf="isLoading">Saving...</span>
+          </button>
+        </div>
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div>
+

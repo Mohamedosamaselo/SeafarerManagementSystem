@@ -1,0 +1,160 @@
+<div class="seafarer-list-container">
+  <!-- Header Toolbar -->
+  <mat-toolbar color="primary" class="header-toolbar">
+    <span class="title">Seafarer Management System</span>
+    <span class="spacer"></span>
+    <button mat-raised-button color="accent" (click)="addSeafarer()" class="add-button">
+      <mat-icon>add</mat-icon>
+      Add Seafarer
+    </button>
+    <button mat-raised-button color="warn" (click)="logout()" class="logout-button">
+      <mat-icon>logout</mat-icon>
+      Logout
+    </button>
+  </mat-toolbar>
+
+  <!-- Main Content -->
+  <div class="content">
+    <mat-card class="list-card">
+      <mat-card-header>
+        <mat-card-title>Seafarers List</mat-card-title>
+        <mat-card-subtitle>Manage all seafarer records</mat-card-subtitle>
+      </mat-card-header>
+
+      <mat-card-content>
+        <!-- Loading Spinner -->
+        <div *ngIf="isLoading" class="loading-container">
+          <mat-spinner></mat-spinner>
+          <p>Loading seafarers...</p>
+        </div>
+
+        <!-- Data Table -->
+        <div *ngIf="!isLoading && seafarers.length > 0" class="table-container">
+          <table mat-table [dataSource]="seafarers" class="seafarer-table">
+            <!-- Employee Name Column -->
+            <ng-container matColumnDef="EmployeeName">
+              <th mat-header-cell *matHeaderCellDef>Employee Name</th>
+              <td mat-cell *matCellDef="let seafarer">
+                <div class="employee-info">
+                  <strong>{{ seafarer.EmployeeName || '-' }}</strong>
+                  <small *ngIf="seafarer.EmployeeNameAR && seafarer.EmployeeNameAR !== seafarer.EmployeeName">
+                    ({{ seafarer.EmployeeNameAR }})
+                  </small>
+                </div>
+              </td>
+            </ng-container>
+
+            <!-- Employee Code Column -->
+            <ng-container matColumnDef="EmployeeCode">
+              <th mat-header-cell *matHeaderCellDef>Employee Code</th>
+              <td mat-cell *matCellDef="let seafarer">{{ seafarer.EmployeeCode || '-' }}</td>
+            </ng-container>
+
+            <!-- Job Name Column -->
+            <ng-container matColumnDef="JobName">
+              <th mat-header-cell *matHeaderCellDef>Job Name</th>
+              <td mat-cell *matCellDef="let seafarer">
+                <div class="job-info">
+                  {{ seafarer.JobName || '-' }}
+                  <small *ngIf="seafarer.JobNameEN && seafarer.JobNameEN !== seafarer.JobName">
+                    <br>{{ seafarer.JobNameEN }}
+                  </small>
+                </div>
+              </td>
+            </ng-container>
+
+            <!-- Nationality Column -->
+            <ng-container matColumnDef="Nationality">
+              <th mat-header-cell *matHeaderCellDef>Nationality</th>
+              <td mat-cell *matCellDef="let seafarer">{{ seafarer.Nationality || '-' }}</td>
+            </ng-container>
+
+            <!-- Phone Column -->
+            <ng-container matColumnDef="Phone">
+              <th mat-header-cell *matHeaderCellDef>Phone</th>
+              <td mat-cell *matCellDef="let seafarer">
+                <div class="contact-info">
+                  <div *ngIf="seafarer.Phone">{{ seafarer.Phone }}</div>
+                  <div *ngIf="seafarer.Mobile && seafarer.Mobile !== seafarer.Phone">
+                    <small>Mobile: {{ seafarer.Mobile }}</small>
+                  </div>
+                  <div *ngIf="!seafarer.Phone && !seafarer.Mobile">-</div>
+                </div>
+              </td>
+            </ng-container>
+
+            <!-- Email Column -->
+            <ng-container matColumnDef="Email">
+              <th mat-header-cell *matHeaderCellDef>Email</th>
+              <td mat-cell *matCellDef="let seafarer">{{ seafarer.Email || '-' }}</td>
+            </ng-container>
+
+            <!-- Passport Number Column -->
+            <ng-container matColumnDef="PassportNumber">
+              <th mat-header-cell *matHeaderCellDef>Passport Number</th>
+              <td mat-cell *matCellDef="let seafarer">{{ seafarer.PassportNumber || '-' }}</td>
+            </ng-container>
+
+            <!-- Visa Expiry Date Column -->
+            <ng-container matColumnDef="VisaExpiryDate">
+              <th mat-header-cell *matHeaderCellDef>Visa Expiry Date</th>
+              <td mat-cell *matCellDef="let seafarer">{{ formatDate(seafarer.VisaExpiryDate) }}</td>
+            </ng-container>
+
+            <!-- Status Column -->
+            <ng-container matColumnDef="Status">
+              <th mat-header-cell *matHeaderCellDef>Status</th>
+              <td mat-cell *matCellDef="let seafarer">
+                <mat-chip [color]="getStatusColor(seafarer.Status)" selected>
+                  {{ getStatusText(seafarer.Status) }}
+                </mat-chip>
+              </td>
+            </ng-container>
+
+            <!-- Actions Column -->
+            <ng-container matColumnDef="actions">
+              <th mat-header-cell *matHeaderCellDef>Actions</th>
+              <td mat-cell *matCellDef="let seafarer">
+                <div class="action-buttons">
+                  <button mat-icon-button color="primary" (click)="editSeafarer(seafarer)" 
+                          matTooltip="Edit Seafarer">
+                    <mat-icon>edit</mat-icon>
+                  </button>
+                  
+                  <button *ngIf="seafarer.Status !== 1" 
+                          mat-icon-button color="accent" 
+                          (click)="activateSeafarer(seafarer)"
+                          matTooltip="Activate Seafarer">
+                    <mat-icon>check_circle</mat-icon>
+                  </button>
+                  
+                  <button *ngIf="seafarer.Status === 1" 
+                          mat-icon-button color="warn" 
+                          (click)="deactivateSeafarer(seafarer)"
+                          matTooltip="Deactivate Seafarer">
+                    <mat-icon>cancel</mat-icon>
+                  </button>
+                </div>
+              </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+          </table>
+        </div>
+
+        <!-- Empty State -->
+        <div *ngIf="!isLoading && seafarers.length === 0" class="empty-state">
+          <mat-icon class="empty-icon">person_off</mat-icon>
+          <h3>No seafarers found</h3>
+          <p>Get started by adding your first seafarer record.</p>
+          <button mat-raised-button color="primary" (click)="addSeafarer()" class="add-first-button">
+            <mat-icon>add</mat-icon>
+            Add First Seafarer
+          </button>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>
+
