@@ -64,7 +64,7 @@ export class SeafarerListComponent implements OnInit {
     this.isLoading = true;
     this.seafarerService.getAllSeafarers().subscribe({
       next: (response) => {
-        // Handle the API response structure
+
         this.seafarers = response.Data || [];
         this.isLoading = false;
       },

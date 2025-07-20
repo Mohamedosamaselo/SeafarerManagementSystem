@@ -1,7 +1,7 @@
 .seafarer-form-container {
-  
+
   background-color: #f5f5f5;
-  padding:50px 20px;
+  padding: 50px 20px;
   overflow-y: auto;
   min-height: 100vh;
 }
@@ -9,9 +9,9 @@
 .form-card {
   max-width: 1000px;
   margin: 0 auto;
-  box-shadow:0 4px 8px rgb(0 0 0 / 41%);
+  box-shadow: 0 4px 8px rgb(0 0 0 / 41%);
   border-radius: 8px;
-  margin-bottom: 40px; 
+  margin-bottom: 40px;
 }
 
 .form-card mat-card-header {
@@ -92,13 +92,13 @@
 
 .form-actions {
   display: flex;
-  justify-content: flex-start; // Changed from flex-end to flex-start
+  justify-content: flex-start;
   gap: 16px;
   margin-top: 32px;
   padding: 20px;
   border-top: 1px solid #e0e0e0;
   background-color: #fff;
-  position: sticky; // Make buttons sticky at bottom
+  position: sticky;
   bottom: 0;
   z-index: 10;
   box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
@@ -108,11 +108,13 @@
   min-width: 120px;
   height: 48px;
 }
+
 .back-button {
-   background-color: #6c757d;
+  background-color: #6c757d;
   color: white !important
 }
-// Back button specific styling
+
+
 .form-actions button:first-child {
   background-color: #6c757d;
   color: white;
@@ -122,43 +124,43 @@
   background-color: #5a6268;
 }
 
-// Responsive design
+
 @media (max-width: 768px) {
   .seafarer-form-container {
     padding: 10px;
   }
-  
+
   .form-row {
     flex-direction: column;
     gap: 8px;
   }
-  
+
   .tab-content {
     padding: 16px 0;
   }
-  
+
   .array-item {
     padding: 12px;
   }
-  
+
   .section-header {
     flex-direction: column;
     align-items: flex-start;
     gap: 8px;
   }
-  
+
   .array-item-header {
     flex-direction: column;
     align-items: flex-start;
     gap: 8px;
   }
-  
+
   .form-actions {
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: center;
   }
-  
+
   .form-actions button {
     flex: 1;
     min-width: 100px;
@@ -170,55 +172,54 @@
     margin: 0;
     border-radius: 0;
   }
-  
+
   .checkbox-section {
     padding: 12px;
   }
-  
+
   .section-header h3 {
     font-size: 16px;
   }
-  
+
   .form-actions {
     flex-direction: column;
   }
-  
+
   .form-actions button {
     width: 100%;
   }
 }
 
-// Material tab styling
 ::ng-deep .mat-mdc-tab-group {
   .mat-mdc-tab-header {
     border-bottom: 1px solid #e0e0e0;
   }
-  
+
   .mat-mdc-tab-body-wrapper {
     padding-top: 0;
-    padding-bottom: 80px; // Add padding to prevent content being hidden behind sticky buttons
+    padding-bottom: 80px;
   }
 }
 
-// Form field styling
+
 ::ng-deep .mat-mdc-form-field {
   .mat-mdc-form-field-subscript-wrapper {
     margin-top: 4px;
   }
 }
 
-// Spinner in button
+
 .form-actions button mat-spinner {
   margin-right: 8px;
 }
 
-// Ensure proper scrolling behavior
-html, body {
+
+html,
+body {
   overflow-x: hidden;
 }
 
-// Fix for tab content scrolling
+
 ::ng-deep .mat-mdc-tab-body-content {
   overflow: visible !important;
 }
-

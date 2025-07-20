@@ -62,7 +62,7 @@ export class SeafarerFormComponent implements OnInit {
     this.initializeForm();
     this.loadDropdownData();
 
-    // Check if we're in edit mode
+
     this.route.params.subscribe(params => {
       if (params['id']) {
         this.isEditMode = true;
@@ -74,7 +74,7 @@ export class SeafarerFormComponent implements OnInit {
 
   initializeForm(): void {
     this.seafarerForm = this.fb.group({
-      // Main entity fields
+
       PassPortIssueDate: [''],
       IDExPiryDate: [''],
       SeamanBookNO: [''],
@@ -102,7 +102,7 @@ export class SeafarerFormComponent implements OnInit {
       CicpaExpiryDate: [''],
       Declaration: [''],
 
-      // Boolean fields with comments
+
       SignedOffFromAShipDueToMedicalReason: [false],
       SignedOffFromAShipDueToMedicalReasonComment: [''],
       UndergoneAnyMedicalOperation: [false],
@@ -116,7 +116,7 @@ export class SeafarerFormComponent implements OnInit {
       LicenseSuspendedOrRevoked: [false],
       LicenseSuspendedOrRevokedComment: [''],
 
-      // Detail arrays
+
       qualifications: this.fb.array([]),
       certificates: this.fb.array([]),
       languages: this.fb.array([]),
@@ -140,7 +140,7 @@ export class SeafarerFormComponent implements OnInit {
   loadSeafarerData(id: number): void {
     this.isLoading = true;
 
-    // First try the main endpoint
+
     this.seafarerService.getSeafarerById(id).subscribe({
       next: (response) => {
         this.isLoading = false;
@@ -155,7 +155,7 @@ export class SeafarerFormComponent implements OnInit {
       },
       error: (error) => {
         console.warn('Primary endpoint failed, trying alternative:', error);
-        // Try alternative endpoint if main one fails
+
         this.seafarerService.getSeafarerDetails(id).subscribe({
           next: (response) => {
             this.isLoading = false;
@@ -174,7 +174,7 @@ export class SeafarerFormComponent implements OnInit {
               duration: 5000
             });
             console.error('Both endpoints failed:', altError);
-            // Navigate back to list if both endpoints fail
+
             // this.router.navigate(['/seafarers']);
           }
         });
@@ -183,7 +183,7 @@ export class SeafarerFormComponent implements OnInit {
   }
 
   populateForm(seafarer: Seafarer, response: any): void {
-    // Populate main form fields
+
     this.seafarerForm.patchValue({
       PassPortIssueDate: this.formatDateForInput(seafarer.PassPortIssueDate),
       IDExPiryDate: this.formatDateForInput(seafarer.NationalIdExpiryDate),
@@ -225,7 +225,7 @@ export class SeafarerFormComponent implements OnInit {
       LicenseSuspendedOrRevokedComment: seafarer.LicenseSuspendedOrRevokedComment
     });
 
-    // Populate dynamic arrays
+
     this.populateQualifications(response.QualificationDetails || []);
     this.populateCertificates(response.Certificates || []);
     this.populateLanguages(response.Languages || []);
@@ -331,7 +331,7 @@ export class SeafarerFormComponent implements OnInit {
     }
   }
 
-  // Form array getters
+
   get qualifications(): FormArray {
     return this.seafarerForm.get('qualifications') as FormArray;
   }
@@ -352,7 +352,7 @@ export class SeafarerFormComponent implements OnInit {
     return this.seafarerForm.get('workExperiences') as FormArray;
   }
 
-  // Add methods for form arrays
+
   addQualification(): void {
     const qualificationGroup = this.fb.group({
       DegreeOrCourse: [''],
@@ -496,7 +496,5 @@ export class SeafarerFormComponent implements OnInit {
   onCancel(): void {
     this.router.navigate(['/seafarers']);
   }
-
-
 }
 
