@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, NgPlural } from '@angular/common';
 import { FormsModule, ReactiveFormsModule, FormBuilder, FormGroup, FormArray, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { MatCardModule } from '@angular/material/card';
@@ -36,11 +36,13 @@ import { DropdownItem, SeafarerRequest, Seafarer, Qualification, Certificate, La
     MatTabsModule,
     MatIconModule,
     MatProgressSpinnerModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    // NgPlural
   ],
   templateUrl: './seafarer-form.html',
   styleUrl: './seafarer-form.scss'
 })
+
 export class SeafarerFormComponent implements OnInit {
   seafarerForm!: FormGroup;
   employees: DropdownItem[] = [];
@@ -59,28 +61,27 @@ export class SeafarerFormComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.initializeForm();
-    this.loadDropdownData();
+    this.initializeForm();    // 1. intialize form
 
+    this.loadDropdownData();  // 2. loadDropdown data from the Backend
 
     this.route.params.subscribe(params => {
       if (params['id']) {
         this.isEditMode = true;
-        this.seafarerId = +params['id'];
-        this.loadSeafarerData(this.seafarerId);
+        this.seafarerId = +params['id'];        // convert 'id' to number and store it in seafarerId
+        this.loadSeafarerData(this.seafarerId); // load seafarer data for edit
       }
     });
   }
 
   initializeForm(): void {
     this.seafarerForm = this.fb.group({
-
       PassPortIssueDate: [''],
       IDExPiryDate: [''],
       SeamanBookNO: [''],
       Remarks: [''],
-      EmpId: ['', Validators.required],
-      VisaSponsorId: ['', Validators.required],
+      // EmpId: ['', Validators.required],
+      // VisaSponsorId: ['', Validators.required],
       VisaIssueDate: [''],
       VisaExpiryDate: [''],
       NameOfSpouse: [''],
@@ -102,7 +103,6 @@ export class SeafarerFormComponent implements OnInit {
       CicpaExpiryDate: [''],
       Declaration: [''],
 
-
       SignedOffFromAShipDueToMedicalReason: [false],
       SignedOffFromAShipDueToMedicalReasonComment: [''],
       UndergoneAnyMedicalOperation: [false],
@@ -116,7 +116,6 @@ export class SeafarerFormComponent implements OnInit {
       LicenseSuspendedOrRevoked: [false],
       LicenseSuspendedOrRevokedComment: [''],
 
-
       qualifications: this.fb.array([]),
       certificates: this.fb.array([]),
       languages: this.fb.array([]),
@@ -126,26 +125,27 @@ export class SeafarerFormComponent implements OnInit {
   }
 
   loadDropdownData(): void {
-    this.dropdownService.getEmployees().subscribe({
+    this.dropdownService.getEmployees().subscribe({ // 1. GetEmployees
       next: (data) => this.employees = data,
       error: (error) => console.error('Error loading employees:', error)
     });
 
-    this.dropdownService.getVendors().subscribe({
+    this.dropdownService.getVendors().subscribe({  // 2. GetVendeors
       next: (data) => this.vendors = data,
       error: (error) => console.error('Error loading vendors:', error)
     });
   }
 
+
   loadSeafarerData(id: number): void {
-    this.isLoading = true;
-    this.seafarerService.getAllSeafarers().subscribe({
+    this.isLoading = true; // show load indicator
+    this.seafarerService.getAllSeafarers().subscribe({ // getAllSeafarers from Api
       next: (response) => {
-        this.isLoading = false;
-        if (response && response.Data && response.Data.length > 0) {
-          const seafarer = response.Data.find((s: Seafarer) => s.Id === id);
+        this.isLoading = false; // dispaly load indicator
+        if (response && response.Data.length > 0) { // check on Response Data Firstly
+          const seafarer = response.find((s: Seafarer) => s.Id === id); // find the Id that matched i
           if (seafarer) {
-            this.populateForm(seafarer, response);
+            this.populateForm(seafarer, response);// populateForm() takes the existing data From API  and fills it into the form controls.
           } else {
             this.snackBar.open("Seafarer not found in the list.", "Close", { duration: 3000 });
             this.router.navigate(["/seafarers"]);
@@ -207,7 +207,6 @@ export class SeafarerFormComponent implements OnInit {
       LicenseSuspendedOrRevokedComment: seafarer.LicenseSuspendedOrRevokedComment
     });
 
-
     this.populateQualifications(response.QualificationDetails || []);
     this.populateCertificates(response.Certificates || []);
     this.populateLanguages(response.Languages || []);
@@ -235,7 +234,7 @@ export class SeafarerFormComponent implements OnInit {
 
   populateCertificates(certificates: Certificate[]): void {
     const certificateArray = this.certificates;
-    certificateArray.clear();
+    certificateArray.clear(); // cleare any existing certificates
 
     certificates.filter(c => c.SeaFarerId === this.seafarerId).forEach(certificate => {
       const certificateGroup = this.fb.group({
@@ -380,10 +379,10 @@ export class SeafarerFormComponent implements OnInit {
     });
     this.languages.push(languageGroup);
   }
-
   removeLanguage(index: number): void {
     this.languages.removeAt(index);
   }
+
 
   addReference(): void {
     const referenceGroup = this.fb.group({
@@ -428,6 +427,7 @@ export class SeafarerFormComponent implements OnInit {
           Id: this.isEditMode ? this.seafarerId : 0,
           ...formValue
         },
+
         Qualifications: formValue.qualifications || [],
         Certificates: formValue.certificates || [],
         Languages: formValue.languages || [],
@@ -478,5 +478,7 @@ export class SeafarerFormComponent implements OnInit {
   onCancel(): void {
     this.router.navigate(['/seafarers']);
   }
+
+
 }
 

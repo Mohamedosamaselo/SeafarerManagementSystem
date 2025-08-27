@@ -30,7 +30,9 @@
 
         <!-- Data Table -->
         <div *ngIf="!isLoading && seafarers.length > 0" class="table-container">
+          <!-- Binding on dataSource  -->
           <table mat-table [dataSource]="seafarers" class="seafarer-table">
+
             <!-- Employee Name Column -->
             <ng-container matColumnDef="EmployeeName">
               <th mat-header-cell *matHeaderCellDef>Employee Name</th>
@@ -116,22 +118,17 @@
               <th mat-header-cell *matHeaderCellDef>Actions</th>
               <td mat-cell *matCellDef="let seafarer">
                 <div class="action-buttons">
-                  <button mat-icon-button color="primary" (click)="editSeafarer(seafarer)" 
-                          matTooltip="Edit Seafarer">
+                  <button mat-icon-button color="primary" (click)="editSeafarer(seafarer)" matTooltip="Edit Seafarer">
                     <mat-icon>edit</mat-icon>
                   </button>
-                  
-                  <button *ngIf="seafarer.Status !== 1" 
-                          mat-icon-button color="accent" 
-                          (click)="activateSeafarer(seafarer)"
-                          matTooltip="Activate Seafarer">
+                  <!-- Active button  -->
+                  <button *ngIf="seafarer.Status !== 1" mat-icon-button color="accent"
+                    (click)="activateSeafarer(seafarer)" matTooltip="Activate Seafarer">
                     <mat-icon>check_circle</mat-icon>
                   </button>
-                  
-                  <button *ngIf="seafarer.Status === 1" 
-                          mat-icon-button color="warn" 
-                          (click)="deactivateSeafarer(seafarer)"
-                          matTooltip="Deactivate Seafarer">
+                  <!-- DeActive button  -->
+                  <button *ngIf="seafarer.Status === 1" mat-icon-button color="warn"
+                    (click)="deactivateSeafarer(seafarer)" matTooltip="Deactivate Seafarer">
                     <mat-icon>cancel</mat-icon>
                   </button>
                 </div>
@@ -140,6 +137,7 @@
 
             <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
             <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
           </table>
         </div>
 
@@ -148,13 +146,15 @@
           <mat-icon class="empty-icon">person_off</mat-icon>
           <h3>No seafarers found</h3>
           <p>Get started by adding your first seafarer record.</p>
+
           <button mat-raised-button color="primary" (click)="addSeafarer()" class="add-first-button">
             <mat-icon>add</mat-icon>
             Add First Seafarer
           </button>
+
         </div>
       </mat-card-content>
     </mat-card>
   </div>
-</div>
 
+</div>

@@ -22,6 +22,7 @@ export const routes: Routes = [
     component: SeafarerFormComponent,
     canActivate: [AuthGuard]
   },
+
   { path: '**', redirectTo: '/login' }
 ];
 

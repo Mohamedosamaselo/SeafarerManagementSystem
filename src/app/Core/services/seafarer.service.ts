@@ -17,15 +17,16 @@ export class SeafarerService {
   ) { }
 
   getAllSeafarers(): Observable<any> {
+    // create QueryParamters
     const params = new HttpParams()
       .set('Direction', 'ltr')
       .set('InCT', '');
 
     return this.http.get<any>(`${this.baseUrl}/GetAllSeafarers`, {
-      headers: this.authService.getAuthHeaders(),
-      params
-    }).pipe(
-      catchError(this.handleError)
+      headers: this.authService.getAuthHeaders(),// Add AuthToken in headers
+      params                                     // Add QueryParams
+    }).pipe(                                     //.pipe() is a chaining mechanism to apply RxJS operators on the observable stream.
+      catchError(this.handleError)               // catch error that hapen during api Request
     );
   }
 
@@ -71,15 +72,14 @@ export class SeafarerService {
     const params = new HttpParams()
       .set('Id', id.toString())
       .set('InCT', '')
-      .set('Status', status.toString()) // 1 for active, 2 for inactive
+      .set('Status', status.toString()) // 1 for active , 2 for inactive
       .set('EmpId', empId.toString());
 
     return this.http.post<any>(`${this.baseUrl}/ActivateAndInActivateSeafarer`, null, {
       headers: this.authService.getAuthHeaders(),
       params
-    }).pipe(
-      catchError(this.handleError)
-    );
+    }).pipe(catchError(this.handleError));
+
   }
 
   private handleError(error: HttpErrorResponse): Observable<never> {
@@ -110,6 +110,8 @@ export class SeafarerService {
 
     console.error('API Error:', error);
     return throwError(() => new Error(errorMessage));
+
   }
+
 }
 

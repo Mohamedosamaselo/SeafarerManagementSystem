@@ -22,8 +22,8 @@
           <button mat-raised-button color="primary" type="submit" [disabled]="isLoading || !loginForm.valid"
             class="login-button">
             @if (isLoading) {
-            <mat-spinner diameter="20"></mat-spinner>
-            <span>Signing In...</span>
+            <mat-spinner diameter="25" class="mx-auto "></mat-spinner>
+            <span>Signing In . . . .</span>
             } @else {
             <span>Sign In</span>
             }

@@ -16,15 +16,15 @@ export class DropdownService {
   ) { }
 
   getEmployees(): Observable<DropdownItem[]> {
-    const params = new HttpParams()
+    const params = new HttpParams() // Set Params
       .set('Id', '0')
       .set('text', '')
       .set('Direction', 'ltr')
       .set('InCT', '');
 
     return this.http.get<DropdownItem[]>(`${this.baseUrl}/POS/FillEmployee`, {
-      headers: this.authService.getAuthHeaders(),
-      params
+      headers: this.authService.getAuthHeaders(),// Send Header
+      params                                     // Send Params
     });
   }
 
@@ -40,5 +40,7 @@ export class DropdownService {
       params
     });
   }
+
+
 }
 

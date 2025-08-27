@@ -1,182 +1,182 @@
-.seafarer-list-container {
-  background-color: #f5f5f5;
+  .seafarer-list-container {
+    background-color: #f5f5f5;
 
-  .header-toolbar {
-    background-color: #1976d2;
-    color: white;
-    padding: 0 1rem;
-  }
-
-
-  .my-3 {
-    margin-top: 1rem;
-    margin-bottom: 1rem;
-  }
-
-  .toolbar {
-    position: sticky;
-    top: 0;
-    z-index: 100;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  }
-
-  .spacer {
-    flex: 1 1 auto;
-  }
-
-  .add-button {
-    margin-right: 1rem;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
-
-  .logout-button {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
-
-  .content {
-    padding: 20px;
-    max-width: 1900px;
-    margin: 0 auto;
-  }
-
-  .table-card {
-    box-shadow: 0 4px 8px rgb(0 0 0 / 98%);
-    border-radius: 8px;
-
-    mat-card-header {
-      margin-bottom: 20px;
-    }
-  }
-
-  .loading-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 40px;
-    gap: 1rem;
-  }
-
-  .table-container {
-    overflow-x: auto;
-  }
-
-  .seafarer-table {
-    width: 100%;
-    min-width: 800px;
-
-    th {
-      background-color: #f8f9fa;
-      font-weight: 600;
-      color: #333;
+    .header-toolbar {
+      background-color: #1976d2;
+      color: white;
+      padding: 0 1rem;
     }
 
-    td {
-      padding: 12px 8px;
-      border-bottom: 1px solid #e0e0e0;
-    }
-  }
 
-  
-  .action-buttons {
-  display: flex;
-  gap: 8px;
-
-  .icon {
-    color: white;
-  }
-
-  .edit {
-    background-color: #1976d2; // blue
-  }
-
-  .activate {
-    background-color: #4caf50; // green
-  }
-
-  .deactivate {
-    background-color: #f44336; // red
-  }
-
- 
-}
-
-
-  .no-data {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 60px 20px;
-    text-align: center;
-    color: #666;
-
-    mat-icon {
-      font-size: 48px;
-      width: 48px;
-      height: 48px;
+    .my-3 {
+      margin-top: 1rem;
       margin-bottom: 1rem;
-      opacity: 0.5;
     }
 
-    p {
-      font-size: 18px;
-      margin-bottom: 20px;
+    .toolbar {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .spacer {
+      flex: 1 1 auto;
+    }
+
+    .add-button {
+      margin-right: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .logout-button {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .content {
+      padding: 20px;
+      max-width: 1900px;
+      margin: 0 auto;
+    }
+
+    .table-card {
+      box-shadow: 0 4px 8px rgb(0 0 0 / 98%);
+      border-radius: 8px;
+
+      mat-card-header {
+        margin-bottom: 20px;
+      }
+    }
+
+    .loading-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 40px;
+      gap: 1rem;
+    }
+
+    .table-container {
+      overflow-x: auto;
+    }
+
+    .seafarer-table {
+      width: 100%;
+      min-width: 800px;
+
+      th {
+        background-color: #f8f9fa;
+        font-weight: 600;
+        color: #333;
+      }
+
+      td {
+        padding: 12px 8px;
+        border-bottom: 1px solid #e0e0e0;
+      }
+    }
+
+
+    .action-buttons {
+      display: flex;
+      gap: 8px;
+
+      .icon {
+        color: white;
+      }
+
+      .edit {
+        background-color: #1976d2; // blue
+      }
+
+      .activate {
+        background-color: #4caf50; // green
+      }
+
+      .deactivate {
+        background-color: #f44336; // red
+      }
+
+
+    }
+
+
+    .no-data {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 60px 20px;
+      text-align: center;
+      color: #666;
+
+      mat-icon {
+        font-size: 48px;
+        width: 48px;
+        height: 48px;
+        margin-bottom: 1rem;
+        opacity: 0.5;
+      }
+
+      p {
+        font-size: 18px;
+        margin-bottom: 20px;
+      }
     }
   }
-}
 
-// ---------------------------------------------------
-// Media Queries at the End
-// ---------------------------------------------------
+  // ---------------------------------------------------
+  // Media Queries at the End
+  // ---------------------------------------------------
 
-@media (max-width: 768px) {
-  .content {
-    padding: 10px;
-  }
+  @media (max-width: 768px) {
+    .content {
+      padding: 10px;
+    }
 
-  .add-button span,
-  .logout-button span {
-    display: none;
-  }
+    .add-button span,
+    .logout-button span {
+      display: none;
+    }
 
-  .table-container {
-    overflow-x: scroll;
-  }
+    .table-container {
+      overflow-x: scroll;
+    }
 
-  .seafarer-table {
-    min-width: 600px;
+    .seafarer-table {
+      min-width: 600px;
 
-    td,
-    th {
-      padding: 8px 4px;
-      font-size: 12px;
+      td,
+      th {
+        padding: 8px 4px;
+        font-size: 12px;
+      }
+    }
+
+    .actions-cell {
+      flex-direction: column;
+      gap: 2px;
+
+      button {
+        min-width: 32px;
+        height: 32px;
+      }
     }
   }
 
-  .actions-cell {
-    flex-direction: column;
-    gap: 2px;
+  @media (max-width: 480px) {
+    .toolbar {
+      padding: 0 8px;
+    }
 
-    button {
-      min-width: 32px;
-      height: 32px;
+    .add-button,
+    .logout-button {
+      min-width: 40px;
+      padding: 0 8px;
     }
   }
-}
-
-@media (max-width: 480px) {
-  .toolbar {
-    padding: 0 8px;
-  }
-
-  .add-button,
-  .logout-button {
-    min-width: 40px;
-    padding: 0 8px;
-  }
-}

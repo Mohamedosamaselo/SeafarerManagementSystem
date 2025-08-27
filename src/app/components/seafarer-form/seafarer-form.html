@@ -1,12 +1,13 @@
 <div class="seafarer-form-container">
   <mat-card class="form-card">
+    <!-- Form Header -->
     <mat-card-header>
       <div>
         <button mat-button type="button" (click)="onCancel()" class="back-button">
-          Back
+          Back <!-- navigate to SeafarerListComponent -->
         </button>
-
       </div>
+
       <mat-card-title>
         {{ isEditMode ? 'Edit Seafarer' : 'Add New Seafarer' }}
       </mat-card-title>
@@ -14,17 +15,18 @@
         {{ isEditMode ? 'Update seafarer information' : 'Enter seafarer details' }}
       </mat-card-subtitle>
 
-
-
     </mat-card-header>
-
+    <!-- Form Content -->
     <mat-card-content>
       <form [formGroup]="seafarerForm" (ngSubmit)="onSubmit()">
+
         <mat-tab-group>
           <!-- Basic Information Tab -->
           <mat-tab label="Basic Information">
             <div class="tab-content">
+              <!-- Employee & Visa row -->
               <div class="form-row">
+                <!-- Employee -->
                 <mat-form-field appearance="outline">
                   <mat-label>Employee</mat-label>
                   <mat-select formControlName="EmpId" required>
@@ -33,7 +35,7 @@
                     </mat-option>
                   </mat-select>
                 </mat-form-field>
-
+                <!-- Visa Sponsor-->
                 <mat-form-field appearance="outline">
                   <mat-label>Visa Sponsor</mat-label>
                   <mat-select formControlName="VisaSponsorId" required>
@@ -42,8 +44,9 @@
                     </mat-option>
                   </mat-select>
                 </mat-form-field>
-              </div>
 
+              </div>
+              <!-- Seaman Book Number & Visa UAE ID Number row -->
               <div class="form-row">
                 <mat-form-field appearance="outline">
                   <mat-label>Seaman Book Number</mat-label>
@@ -55,19 +58,18 @@
                   <input matInput formControlName="VisaUAEIdNO">
                 </mat-form-field>
               </div>
-
+              <!-- name of suppose & Num of Children -->
               <div class="form-row">
                 <mat-form-field appearance="outline">
                   <mat-label>Name of Spouse</mat-label>
                   <input matInput formControlName="NameOfSpouse">
                 </mat-form-field>
-
                 <mat-form-field appearance="outline">
                   <mat-label>Number of Children</mat-label>
                   <input matInput type="number" formControlName="NoOfChildren">
                 </mat-form-field>
               </div>
-
+              <!-- Body Weight & height  -->
               <div class="form-row">
                 <mat-form-field appearance="outline">
                   <mat-label>Body Weight (kg)</mat-label>
@@ -79,12 +81,14 @@
                   <input matInput type="number" formControlName="Height">
                 </mat-form-field>
               </div>
+
             </div>
           </mat-tab>
 
-          <!-- Dates Tab -->
+          <!-- Important Dates Tab -->
           <mat-tab label="Important Dates">
             <div class="tab-content">
+              <!-- Passport Issue Date & Id Expiery Date row  -->
               <div class="form-row">
                 <mat-form-field appearance="outline">
                   <mat-label>Passport Issue Date</mat-label>
@@ -100,7 +104,7 @@
                   <mat-datepicker #idExpiryPicker></mat-datepicker>
                 </mat-form-field>
               </div>
-
+              <!-- Visa Issue Date & Visa Expiry date row -->
               <div class="form-row">
                 <mat-form-field appearance="outline">
                   <mat-label>Visa Issue Date</mat-label>
@@ -116,7 +120,7 @@
                   <mat-datepicker #visaExpiryPicker></mat-datepicker>
                 </mat-form-field>
               </div>
-
+              <!-- Seaman Issue Date &  Seaman Expiry Date-->
               <div class="form-row">
                 <mat-form-field appearance="outline">
                   <mat-label>Seaman Issue Date</mat-label>
@@ -348,7 +352,6 @@
         </mat-tab-group>
 
         <div class="form-actions">
-
           <button mat-button type="button" (click)="onCancel()">Cancel</button>
           <button mat-raised-button color="primary" type="submit" [disabled]="isLoading">
             <mat-spinner *ngIf="isLoading" diameter="20"></mat-spinner>
@@ -357,6 +360,7 @@
           </button>
         </div>
       </form>
+
     </mat-card-content>
   </mat-card>
 </div>

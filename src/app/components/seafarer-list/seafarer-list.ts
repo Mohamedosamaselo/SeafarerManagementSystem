@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, NgClass } from '@angular/common';
 import { Router } from '@angular/router';
 import { MatTableModule } from '@angular/material/table';
 import { MatButtonModule } from '@angular/material/button';
@@ -61,44 +61,40 @@ export class SeafarerListComponent implements OnInit {
   }
 
   loadSeafarers(): void {
-    this.isLoading = true;
-    this.seafarerService.getAllSeafarers().subscribe({
+    this.isLoading = true; // modiyfy loading state
+    this.seafarerService.getAllSeafarers().subscribe({ // call a serviceMethod(getAllSeafarers) from Api
       next: (response) => {
-
-        this.seafarers = response.Data || [];
+        console.log(response);
+        this.seafarers = response || []; //  set Res  in Seafarers[]
         this.isLoading = false;
       },
-      error: (error) => {
+      error: (error) => {// handel Error , open snackbar with error
         this.isLoading = false;
         this.snackBar.open('Failed to load seafarers', 'Close', {
           duration: 3000
         });
-        console.error('Error loading seafarers:', error);
+        console.error('Error loading seafarers:', error); // incase data hasn't get from Api
       }
     });
   }
 
   addSeafarer(): void {
-    this.router.navigate(['/seafarer-form']);
+    this.router.navigate(['/seafarer-form']);// Navigaite to seafarerFrom [GetEmployee(), GetVendors()]
   }
 
   editSeafarer(seafarer: Seafarer): void {
-    this.router.navigate(['/seafarer-form', seafarer.Id]);
+    this.router.navigate(['/seafarer-form', seafarer.Id]); // navigate and send SeafarerId
   }
 
   activateSeafarer(seafarer: Seafarer): void {
     if (seafarer.Id && seafarer.EmpId) {
       this.seafarerService.activateDeactivateSeafarer(seafarer.Id, 1, seafarer.EmpId).subscribe({
         next: () => {
-          this.snackBar.open('Seafarer activated successfully', 'Close', {
-            duration: 3000
-          });
+          this.snackBar.open('Seafarer activated successfully', 'Close', { duration: 3000 });
           this.loadSeafarers();
         },
         error: (error) => {
-          this.snackBar.open('Failed to activate seafarer', 'Close', {
-            duration: 3000
-          });
+          this.snackBar.open('Failed to activate seafarer', 'Close', { duration: 3000 });
           console.error('Error activating seafarer:', error);
         }
       });
@@ -140,7 +136,7 @@ export class SeafarerListComponent implements OnInit {
       case 1:
         return 'primary';
       case 2:
-        return 'warn';
+        return 'danger';
       default:
         return 'accent';
     }
@@ -151,7 +147,8 @@ export class SeafarerListComponent implements OnInit {
     try {
       const date = new Date(dateString);
       return date.toLocaleDateString();
-    } catch {
+    }
+    catch {
       return '-';
     }
   }
